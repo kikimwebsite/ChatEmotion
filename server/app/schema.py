@@ -16,8 +16,11 @@ class AnalyzeEmotion(graphene.Mutation):
         return AnalyzeEmotion(emotions=[
             EmotionResult(label=label, score=score) for label, score in emotion_results
         ])
+    
+class Query(graphene.ObjectType):
+    hello = graphene.String(default_value="Hello, world!")
 
 class Mutation(graphene.ObjectType):
     analyze_emotion = AnalyzeEmotion.Field()
 
-schema = graphene.Schema(mutation=Mutation)
+schema = graphene.Schema(query=Query, mutation=Mutation)
